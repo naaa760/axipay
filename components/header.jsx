@@ -3,10 +3,12 @@ import { Button } from "./ui/button";
 import { PenBox, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-// import { checkUser } from "@/lib/checkUser";
+import { checkUser } from "@/lib/checkUser";
 import Image from "next/image";
 
 const Header = async () => {
+  await checkUser();
+
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -23,12 +25,12 @@ const Header = async () => {
         {/* Navigation Links - Different for signed in/out users */}
         <div className="hidden md:flex items-center space-x-8">
           <SignedOut>
-            <a href="#features" className="text-gray-600 hover:text-pink-700">
+            <a href="#features" className="text-gray-600 hover:text-blue-600">
               Features
             </a>
             <a
               href="#testimonials"
-              className="text-gray-600 hover:text-pink-700"
+              className="text-gray-600 hover:text-blue-600"
             >
               Testimonials
             </a>
@@ -40,7 +42,7 @@ const Header = async () => {
           <SignedIn>
             <Link
               href="/dashboard"
-              className="text-gray-600 hover:text-pink-700 flex items-center gap-2"
+              className="text-gray-600 hover:text-blue-600 flex items-center gap-2"
             >
               <Button variant="outline">
                 <LayoutDashboard size={18} />
